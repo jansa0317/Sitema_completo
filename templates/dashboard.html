@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1 class="dashboard-title">Dashboard</h1>
+        {% if current_user.tipo_usuario == 'coordinador' %}
+            <div class="dashboard-content">
+                <div class="dashboard-card">
+                    <h2>Coordinador</h2>
+                    <ul>
+                        <li><a href="{{ url_for('ver_estudiantes') }}" class="dashboard-button">Ver Estudiantes</a></li>
+                        <li><a href="{{ url_for('registrar_pago_profesor') }}" class="dashboard-button">Registrar Pago de Profesores</a></li>
+                        <li><a href="{{ url_for('logout') }}" class="dashboard-button">Cerrar Sesión</a></li>
+                    </ul>
+                </div>
+            </div>
+        {% elif current_user.tipo_usuario == 'profesor' %}
+            <div class="dashboard-content">
+                <div class="dashboard-card">
+                    <h2>Profesor</h2>
+                    <ul>
+                        <li><a href="{{ url_for('ver_notas') }}" class="dashboard-button">Ver Notas</a></li>
+                        <li><a href="{{ url_for('logout') }}" class="dashboard-button">Cerrar Sesión</a></li>
+                    </ul>
+                </div>
+            </div>
+        {% else %}
+            <div class="dashboard-content">
+                <div class="dashboard-card">
+                    <h2>Estudiante</h2>
+                    <ul>
+                        <li><a href="{{ url_for('ver_notas') }}" class="dashboard-button">Ver Notas</a></li>
+                        <li><a href="{{ url_for('logout') }}" class="dashboard-button">Cerrar Sesión</a></li>
+                    </ul>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

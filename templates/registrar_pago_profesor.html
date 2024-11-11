@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Pago de Profesores</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="registrar-pago-profesor-container">
+        <h1>Registrar Pago de Profesores</h1>
+        <form action="" method="post">
+            <table class="registrar-pago-profesor-table">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Materia</th>
+                    <th>Pago</th>
+                </tr>
+                {% for profesor in profesores %}
+                <tr>
+                    <td>{{ profesor[0] }}</td>
+                    <td>{{ profesor[1] }}</td>
+                    <td>{{ profesor[2] }}</td>
+                    <td>
+                        <input type="radio" id="si_{{ profesor[0] }}" name="pago_{{ profesor[0] }}" value="Si" {% if profesor[3] %}checked{% endif %}>
+                        <label for="si_{{ profesor[0] }}">Si</label>
+                        <input type="radio" id="no_{{ profesor[0] }}" name="pago_{{ profesor[0] }}" value="No" {% if not profesor[3] %}checked{% endif %}>
+                        <label for="no_{{ profesor[0] }}">No</label>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+            <input type="submit" value="Guardar" class="registrar-pago-profesor-button">
+        </form>
+    </div>
+</body>
+</html>

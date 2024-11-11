@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudiantes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="ver-estudiantes-container">
+        <h2>Estudiantes</h2>
+        
+        <h3>Grado 6</h3>
+        <table class="ver-estudiantes-table">
+            <tr>
+                <th>ID</th>
+                <th>Identificación</th>
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th>Grado</th>
+                <th>Matrícula Pagada</th>
+                <th>Marcar como Pagada</th>
+            </tr>
+            {% for estudiante in estudiantes_6 %}
+            <tr>
+                <td>{{ estudiante[0] }}</td>
+                <td>{{ estudiante[1] }}</td>
+                <td>{{ estudiante[2] }}</td>
+                <td>{{ estudiante[3] }}</td>
+                <td>{{ estudiante[4] }}</td>
+                <td>{{ estudiante[5] }}</td>
+                <td>
+                    <form action="" method="post">
+                        <input type="hidden" name="estudiante_id" value="{{ estudiante[0] }}">
+                        <input type="submit" value="Marcar como Pagada" class="ver-estudiantes-button">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        
+        <h3>Grado 7</h3>
+        <table class="ver-estudiantes-table">
+            <tr>
+                <th>ID</th>
+                <th>Identificación</th>
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th>Grado</th>
+                <th>Matrícula Pagada</th>
+                <th>Marcar como Pagada</th>
+            </tr>
+            {% for estudiante in estudiantes_7 %}
+            <tr>
+                <td>{{ estudiante[0] }}</td>
+                <td>{{ estudiante[1] }}</td>
+                <td>{{ estudiante[2] }}</td>
+                <td>{{ estudiante[3] }}</td>
+                <td>{{ estudiante[4] }}</td>
+                <td>{{ estudiante[5] }}</td>
+                <td>
+                    <form action="" method="post">
+                        <input type="hidden" name="estudiante_id" value="{{ estudiante[0] }}">
+                        <input type="submit" value="Marcar como Pagada" class="ver-estudiantes-button">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        
+        <h3>Grado 8</h3>
+        <table class="ver-estudiantes-table">
+            <tr>
+                <th>ID</th>
+                <th>Identificación</th>
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th>Grado</th>
+                <th>Matrícula Pagada</th>
+                <th>Marcar como Pagada</th>
+            </tr>
+            {% for estudiante in estudiantes_8 %}
+            <tr>
+                <td>{{ estudiante[0] }}</td>
+                <td>{{ estudiante[1] }}</td>
+                <td>{{ estudiante[2] }}</td>
+                <td>{{ estudiante[3] }}</td>
+                <td>{{ estudiante[4] }}</td>
+                <td>{{ estudiante[5] }}</td>
+                <td>
+                    <form action="" method="post">
+                        <input type="hidden" name="estudiante_id" value="{{ estudiante[0] }}">
+                        <input type="submit" value="Marcar como Pagada" class="ver-estudiantes-button">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

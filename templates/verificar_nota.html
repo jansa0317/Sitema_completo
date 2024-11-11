@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificar Nota - Los Backstreet Boys</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Verificar Nota de Estudiante - Los Backstreet Boys</h1>
+        <form action="" method="post">
+            <label for="id_estudiante">ID del Estudiante:</label>
+            <input type="text" id="id_estudiante" name="id_estudiante"><br><br>
+            <input type="submit" value="Verificar Nota">
+        </form>
+
+        {% if estudiante %}
+        <h2>Notas de {{ estudiante[0] }} (Grado {{ estudiante[1] }})</h2>
+        <table border="1">
+            <tr>
+                <th>Materia</th>
+                <th>Nota</th>
+            </tr>
+            {% for nota in notas %}
+            <tr>
+                <td>{{ nota[0] }}</td>
+                <td>{{ nota[1] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </div>
+</body>
+</html>

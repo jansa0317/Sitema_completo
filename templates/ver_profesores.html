@@ -1,0 +1,17 @@
+<h2>Profesores</h2>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Usuario</th>
+        <th>Materia</th>
+        <th>Nombre</th>
+    </tr>
+    {% for profesor in profesores %}
+    <tr>
+        <td>{{ profesor[0] }}</td>
+        <td>{{ profesor[1] }}</td>
+        <td>{{ profesor[2] }}</td>
+        <td>{{ profesor[3] }}</td>
+    </tr>
+    {% endfor %}
+</table>

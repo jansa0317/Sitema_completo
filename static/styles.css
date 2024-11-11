@@ -1,0 +1,344 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2, h3 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type="text"], input[type="password"], input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #333333;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #444444;
+}
+
+a {
+    text-decoration: none;
+    color: #333333;
+}
+
+a:hover {
+    color: #444444;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #CCCCCC;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #F0F0F0;
+}
+
+/* Media query para dispositivos móviles */
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+}
+
+/* Estilos para la página de login */
+
+.login-container {
+    width: 350px;
+    margin: 50px auto;
+    padding: 60px;
+    background-color: #F7F7F7;
+    border: 1px solid #CCCCCC;
+    border-radius: 30px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-container h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login-container label {
+    display: block;
+    margin-bottom: 15px;
+}
+
+.login-container input[type="text"], .login-container input[type="password"] {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+}
+
+.login-container input[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    background-color: #333333;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-container input[type="submit"]:hover {
+    background-color: #444444;
+}
+
+.login-container a {
+    text-decoration: none;
+    color: #333333;
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.login-container a:hover {
+    color: #444444;
+}
+
+/* Estilos para la tabla de notas en /ver_notas */
+
+.ver-notas-table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #CCCCCC;
+    margin-bottom: 10px;
+}
+
+.ver-notas-table th, .ver-notas-table td {
+    border: 1px solid #CCCCCC;
+    padding: 15px;
+    text-align: center;
+}
+
+.ver-notas-table th {
+    background-color: #333333;
+    color: #FFFFFF;
+}
+
+.ver-notas-table td {
+    background-color: #F7F7F7;
+}
+
+.ver-notas-table input[type="number"] {
+    width: 100%;
+    padding: 4px;
+    margin-bottom: 10px;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+}
+
+.ver-notas-table h2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.ver-notas-container {
+    width: 800px;
+    margin: 50px auto;
+    padding: 10px;
+    background-color: #F7F7F7;
+    border: 1px solid #CCCCCC;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para el dashboard */
+
+.dashboard-container {
+    width: 100%;
+    margin: 50px auto;
+    padding: 2px;
+    background-color: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-title {
+    padding: 2px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.dashboard-content {
+    padding: 2px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.dashboard-card {
+    width: 300px;
+    margin: 20px;
+    padding: 30px;
+    background-color: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-card h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    padding: 22px;
+}
+
+.dashboard-button {
+    width: 50%;
+    padding: 2px;
+    background-color: #333333;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.dashboard-button:hover {
+    background-color: #fff8f8;
+}
+
+/* Media query para dispositivos móviles */
+@media (max-width: 768px) {
+    .dashboard-content {
+        flex-direction: column;
+    }
+    .dashboard-card {
+        width: 100%;
+        margin: 10px 0;
+    }
+}
+
+/* Estilos para la página de ver estudiantes */
+
+.ver-estudiantes-container {
+    width: 90%;
+    margin: 50px auto;
+    padding: 25px;
+    background-color: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.ver-estudiantes-table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #CCCCCC;
+    margin-bottom: 20px;
+}
+
+.ver-estudiantes-table th, .ver-estudiantes-table td {
+    border: 1px solid #CCCCCC;
+    padding: 15px;
+    text-align: center;
+}
+
+.ver-estudiantes-table th {
+    background-color: #333333;
+    color: #FFFFFF;
+}
+
+.ver-estudiantes-table td {
+    background-color: #F7F7F7;
+}
+
+.ver-estudiantes-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #333333;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.ver-estudiantes-button:hover {
+    background-color: #444444;
+}
+
+/* Estilos para la página de registrar pago de profesores */
+
+.registrar-pago-profesor-container {
+    width: 85%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.registrar-pago-profesor-table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #CCCCCC;
+    margin-bottom: 20px;
+    padding: 20px;
+
+}
+
+.registrar-pago-profesor-table th, .registrar-pago-profesor-table td {
+    border: 1px solid #CCCCCC;
+    padding: 5px;
+    text-align: center;
+}
+
+.registrar-pago-profesor-table th {
+    background-color: #333333;
+    color: #FFFFFF;
+}
+
+.registrar-pago-profesor-table td {
+    background-color: #F7F7F7;
+}
+
+.registrar-pago-profesor-button {
+    width: 100%;
+    padding: 5px;
+    background-color: #333333;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.registrar-pago-profesor-button:hover {
+    background-color: #444444;
+}

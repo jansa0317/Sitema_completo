@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Notas - Los Backstreet Boys</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="ver-notas-container">
+        <h1>Ver Notas de {{ materia }} - Los Backstreet Boys</h1>
+        <form action="" method="post">
+            {% for grado, estudiantes in estudiantes_por_grado.items() %}
+            <h2 class="ver-notas-table h2">{{ grado }}</h2>
+            <table class="ver-notas-table">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Nota</th>
+                    <th>Última Nota</th>
+                </tr>
+                {% for estudiante in estudiantes %}
+                <tr>
+                    <td>{{ estudiante[0] }}</td>
+                    <td>{{ estudiante[1] }}</td>
+                    <td>
+                        <input type="number" id="nota_{{ estudiante[0] }}" name="{{ estudiante[0] }}" value="{{ notas_por_estudiante.get(estudiante[0], '') }}">
+                    </td>
+                    <td>{{ ultimas_notas.get(estudiante[0], '') }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% endfor %}
+            <input type="submit" value="Guardar Notas">
+        </form>
+    </div>
+</body>
+</html>
