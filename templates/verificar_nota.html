@@ -4,17 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verificar Nota - Los Backstreet Boys</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <div class="container">
         <h1>Verificar Nota de Estudiante - Los Backstreet Boys</h1>
+        
         <form action="" method="post">
             <label for="id_estudiante">ID del Estudiante:</label>
-            <input type="text" id="id_estudiante" name="id_estudiante"><br><br>
+            <input type="text" id="id_estudiante" name="id_estudiante" required><br><br>
             <input type="submit" value="Verificar Nota">
         </form>
-
+        
         {% if estudiante %}
         <h2>Notas de {{ estudiante[0] }} (Grado {{ estudiante[1] }})</h2>
         <table border="1">
@@ -29,6 +33,8 @@
             </tr>
             {% endfor %}
         </table>
+        {% else %}
+        <p>No se encontraron notas para este estudiante.</p>
         {% endif %}
     </div>
 </body>

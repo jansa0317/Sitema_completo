@@ -7,15 +7,17 @@ MATRICULA_GRADO_7 = 700000
 MATRICULA_GRADO_8 = 800000
 
 def generar_nombre_aleatorio():
+    """Genera un nombre aleatorio."""
     nombres = ["Juan", "Ana", "Carlos", "Maria", "Pedro", "Laura", "Luis", "Sofia", "Felipe", "Marta"]
     apellidos = ["Gomez", "Lopez", "Martinez", "Perez", "Rodriguez", "Sanchez", "Garcia", "Fernandez", "Torres", "Diaz"]
-    nombre = random.choice(nombres) + " " + random.choice(apellidos)
-    return nombre
+    return f"{random.choice(nombres)} {random.choice(apellidos)}"
 
 def generar_id_unica():
+    """Genera un ID único."""
     return str(random.randint(100000, 999999))
 
 def setup_database():
+    """Configura la base de datos."""
     conn = sqlite3.connect('colegio.db')
     cursor = conn.cursor()
 
@@ -78,15 +80,18 @@ def setup_database():
     cursor.execute("INSERT OR IGNORE INTO usuarios (usuario, contrasena, tipo_usuario) VALUES ('coordinador', '1234', 'coordinador')")
 
     # Insertar profesores para pruebas
-    cursor.execute("INSERT OR IGNORE INTO usuarios (usuario, contrasena, tipo_usuario) VALUES ('camila', '1234', 'profesor')")
-    cursor.execute("INSERT OR IGNORE INTO usuarios (usuario, contrasena, tipo_usuario) VALUES ('juan', '1234', 'profesor')")
-    cursor.execute("INSERT OR IGNORE INTO usuarios (usuario, contrasena, tipo_usuario) VALUES ('brian', '1234', 'profesor')")
-    cursor.execute("INSERT OR IGNORE INTO usuarios (usuario, contrasena, tipo_usuario) VALUES ('david', '1234', 'profesor')")
+    profesores = [
+        {'usuario': 'camila', 'contrasena': '1234', 'materia': 'Ingles', 'nombre': 'Camila', 'grados': '6,7,8'},
+        {'usuario': 'juan', 'contrasena': '1234', 'materia': 'Español', 'nombre': 'Juan', 'grados': '6,7,8'},
+        {'usuario': 'brian', 'contrasena': '1234', 'materia': 'Fisica', 'nombre': 'Brian', 'grados': '6,7,8'},
+        {'usuario': 'david', 'contrasena': '1234', 'materia': 'Ciencias', 'nombre': 'David', 'grados': '6,7,8'}
+    ]
 
-    cursor.execute("INSERT OR IGNORE INTO profesores (usuario, contrasena, materia, nombre, grados) VALUES ('camila', '1234', 'Ingles', 'Camila', '6,7,8')")
-    cursor.execute("INSERT OR IGNORE INTO profesores (usuario, contrasena, materia, nombre, grados) VALUES ('juan', '1234', 'Español', 'Juan', '6,7,8')")
-    cursor.execute("INSERT OR IGNORE INTO profesores (usuario, contrasena, materia, nombre, grados) VALUES ('brian', '1234', 'Fisica', 'Brian', '6,7,8')")
-    cursor.execute("INSERT OR IGNORE INTO profesores (usuario, contrasena, materia, nombre, grados) VALUES ('david', '1234', 'Ciencias', 'David', '6,7,8')")
+    for profesor in profesores:
+        cursor.execute("INSERT OR IGNORE INTO usuarios (usuario, contrasena, tipo_usuario) VALUES (?, ?, 'profesor')",
+                       (profesor['usuario'], profesor['contrasena']))
+        cursor.execute("INSERT OR IGNORE INTO profesores (usuario, contrasena, materia, nombre, grados) VALUES (?, ?, ?, ?, ?)",
+                       (profesor['usuario'], profesor['contrasena'], profesor['materia'], profesor['nombre'], profesor['grados']))
 
     # Insertar estudiantes con el estado de matrícula sin pagar y notas iniciales
     for grado in [6, 7, 8]:

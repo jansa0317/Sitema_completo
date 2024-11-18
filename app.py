@@ -45,15 +45,20 @@ def login():
         # Verificar credenciales
         conn = sqlite3.connect('colegio.db')
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM usuarios WHERE usuario = ? AND contrasena = ?", (usuario, contrasena))
+        cursor.execute("SELECT * FROM usuarios WHERE usuario = ?", (usuario,))
         usuario_encontrado = cursor.fetchone()
 
-        # Verificar si es profesor
-        if not usuario_encontrado:
-            cursor.execute("SELECT * FROM profesores WHERE usuario = ? AND contrasena = ?", (usuario, contrasena))
+        if usuario_encontrado and usuario_encontrado[2] == contrasena:
+            login_user(Usuario(*usuario_encontrado))
+            if usuario_encontrado[2] == 'coordinador':
+                return redirect(url_for('dashboard'))
+            else:
+                return redirect(url_for('ver_notas'))
+        elif not usuario_encontrado:
+            cursor.execute("SELECT * FROM profesores WHERE usuario = ?", (usuario,))
             usuario_encontrado = cursor.fetchone()
 
-            if usuario_encontrado:
+            if usuario_encontrado and usuario_encontrado[2] == contrasena:
                 # Guardar materia del profesor
                 usuario_obj = Usuario(usuario_encontrado[0], usuario_encontrado[1], usuario_encontrado[2], usuario_encontrado[3], usuario_encontrado[4])
                 login_user(usuario_obj)
@@ -62,14 +67,36 @@ def login():
                 else:
                     return redirect(url_for('dashboard'))
 
-        if usuario_encontrado:
-            login_user(Usuario(*usuario_encontrado))
-            if usuario_encontrado[2] == 'coordinador':
-                return redirect(url_for('dashboard'))
-            else:
-                return redirect(url_for('ver_notas'))
-
     return render_template('login.html')
+
+# Ruta para cambiar contraseña
+@app.route('/cambiar_contrasena', methods=['GET', 'POST'])
+@login_required
+def cambiar_contrasena():
+    if request.method == 'POST':
+        contrasena_actual = request.form['contrasena_actual']
+        nueva_contrasena = request.form['nueva_contrasena']
+        confirmar_contrasena = request.form['confirmar_contrasena']
+
+        # Verificar contraseña actual
+        conn = sqlite3.connect('colegio.db')
+        cursor = conn.cursor()
+        cursor.execute("SELECT contrasena FROM usuarios WHERE id = ?", (current_user.id,))
+        contrasena_actual_db = cursor.fetchone()[0]
+
+        if contrasena_actual == contrasena_actual_db:
+            if nueva_contrasena == confirmar_contrasena:
+                # Actualizar contraseña
+                cursor.execute("UPDATE usuarios SET contrasena = ? WHERE id = ?", (nueva_contrasena, current_user.id))
+                conn.commit()
+                flash('Contraseña cambiada correctamente')
+                return redirect(url_for('login'))
+            else:
+                flash('Las contraseñas no coinciden')
+        else:
+            flash('Contraseña actual incorrecta')
+
+    return render_template('cambiar_contrasena.html')
 
 # Ruta de logout
 @app.route('/logout')
@@ -193,7 +220,6 @@ def ver_notas():
     try:
         conn = sqlite3.connect('colegio.db')
         cursor = conn.cursor()
-        print("Conexión exitosa")
 
         # Obtener materia del profesor actual
         cursor.execute("SELECT materia FROM profesores WHERE usuario = ?", (current_user.usuario,))
@@ -230,12 +256,16 @@ def ver_notas():
         ultimas_notas = {nota[0]: nota[1] for nota in ultimas_notas_db}
 
         if request.method == 'POST':
-            for estudiante_id, nota in request.form.items():
-                if estudiante_id != 'csrf_token':
-                    cursor.execute("INSERT OR REPLACE INTO notas (id_estudiante, id_profesor, materia, nota) VALUES (?, ?, ?, ?)",
-                                   (estudiante_id, current_user.id, materia_profesor, nota))
-                    conn.commit()
-                    ultimas_notas[int(estudiante_id)] = nota  # Actualizar última nota
+            for grado, estudiantes_grado in estudiantes_por_grado.items():
+                for estudiante in estudiantes_grado:
+                    estudiante_id = estudiante[0]
+                    for i in range(1, 5):  # Notas 1 a 4
+                        nota_key = f"nota{i}_{estudiante_id}"
+                        nota = request.form.get(nota_key)
+                        if nota:  # Si la nota no está vacía
+                            cursor.execute("INSERT OR REPLACE INTO notas (id_estudiante, id_profesor, materia, nota) VALUES (?, ?, ?, ?)",
+                                           (estudiante_id, current_user.id, materia_profesor, nota))
+                            conn.commit()
             flash('Notas guardadas correctamente')
             return redirect(url_for('ver_notas'))
 
@@ -263,11 +293,24 @@ def verificar_nota():
         estudiante_data = cursor.fetchone()
 
         if estudiante_data:
-            # Obtener notas del estudiante
-            cursor.execute("SELECT p.materia, n.nota FROM notas n INNER JOIN profesores p ON n.id_profesor = p.id WHERE n.id_estudiante = ?", (id_estudiante,))
-            notas = cursor.fetchall()
+            # Obtener últimas notas del estudiante por materia
+            cursor.execute("""
+                SELECT n.materia, n.nota 
+                FROM notas n
+                INNER JOIN (
+                    SELECT materia, MAX(id) as max_id
+                    FROM notas
+                    WHERE id_estudiante = ?
+                    GROUP BY materia
+                ) t ON n.id = t.max_id
+            """, (id_estudiante,))
+            ultimas_notas = cursor.fetchall()
 
-            return render_template('verificar_nota.html', estudiante=estudiante_data, notas=notas)
+            if ultimas_notas:
+                return render_template('verificar_nota.html', estudiante=estudiante_data, notas=ultimas_notas)
+            else:
+                flash('No hay notas registradas para este estudiante')
+                return redirect(url_for('verificar_nota'))
         else:
             flash('Estudiante no encontrado')
             return redirect(url_for('verificar_nota'))

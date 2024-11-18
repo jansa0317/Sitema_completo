@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ver Notas - Los Backstreet Boys</title>
+    <title>Verificar Nota - Los Backstreet Boys</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <div class="ver-notas-container">
-        <h1>Ver Notas de {{ materia }} - Los Backstreet Boys</h1>
+        <h1>Verificar Nota de Estudiante - Los Backstreet Boys</h1>
         <form action="" method="post">
             {% for grado, estudiantes in estudiantes_por_grado.items() %}
             <h2 class="ver-notas-table h2">{{ grado }}</h2>
@@ -16,7 +19,10 @@
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
-                    <th>Nota</th>
+                    <th>Nota 1</th>
+                    <th>Nota 2</th>
+                    <th>Nota 3</th>
+                    <th>Nota 4</th>
                     <th>Última Nota</th>
                 </tr>
                 {% for estudiante in estudiantes %}
@@ -24,7 +30,16 @@
                     <td>{{ estudiante[0] }}</td>
                     <td>{{ estudiante[1] }}</td>
                     <td>
-                        <input type="number" id="nota_{{ estudiante[0] }}" name="{{ estudiante[0] }}" value="{{ notas_por_estudiante.get(estudiante[0], '') }}">
+                        <input type="number" step="0.1" min="1.0" max="5.0" id="nota1_{{ estudiante[0] }}" name="nota1_{{ estudiante[0] }}">
+                    </td>
+                    <td>
+                        <input type="number" step="0.1" min="1.0" max="5.0" id="nota2_{{ estudiante[0] }}" name="nota2_{{ estudiante[0] }}">
+                    </td>
+                    <td>
+                        <input type="number" step="0.1" min="1.0" max="5.0" id="nota3_{{ estudiante[0] }}" name="nota3_{{ estudiante[0] }}">
+                    </td>
+                    <td>
+                        <input type="number" step="0.1" min="1.0" max="5.0" id="nota4_{{ estudiante[0] }}" name="nota4_{{ estudiante[0] }}">
                     </td>
                     <td>{{ ultimas_notas.get(estudiante[0], '') }}</td>
                 </tr>

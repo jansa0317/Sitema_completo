@@ -4,15 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <div class="dashboard-container">
-        <h1 class="dashboard-title">Dashboard</h1>
+        <h1 class="dashboard-title">DASHBOARD</h1>
         {% if current_user.tipo_usuario == 'coordinador' %}
             <div class="dashboard-content">
                 <div class="dashboard-card">
-                    <h2>Coordinador</h2>
+                    <h2>COORDINADOR</h2>
                     <ul>
                         <li><a href="{{ url_for('ver_estudiantes') }}" class="dashboard-button">Ver Estudiantes</a></li>
                         <li><a href="{{ url_for('registrar_pago_profesor') }}" class="dashboard-button">Registrar Pago de Profesores</a></li>
@@ -36,6 +39,7 @@
                     <h2>Estudiante</h2>
                     <ul>
                         <li><a href="{{ url_for('ver_notas') }}" class="dashboard-button">Ver Notas</a></li>
+                        <li><a href="{{ url_for('verificar_nota') }}" class="dashboard-button">Verificar Nota</a></li>
                         <li><a href="{{ url_for('logout') }}" class="dashboard-button">Cerrar Sesión</a></li>
                     </ul>
                 </div>

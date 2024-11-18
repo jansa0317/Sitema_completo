@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambiar Contraseña - Los Backstreet Boys</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="login-container">
+        <h1>Cambiar Contraseña - Los Backstreet Boys</h1>
+        <form action="" method="post">
+            <label for="contrasena_actual">Contraseña actual:</label>
+            <input type="password" id="contrasena_actual" name="contrasena_actual" required autofocus><br><br>
+            <label for="nueva_contrasena">Nueva contraseña:</label>
+            <input type="password" id="nueva_contrasena" name="nueva_contrasena" required><br><br>
+            <label for="confirmar_contrasena">Confirmar nueva contraseña:</label>
+            <input type="password" id="confirmar_contrasena" name="confirmar_contrasena" required><br><br>
+            <input type="submit" value="Cambiar contraseña">
+        </form>
+        {% with mensajes = get_flashed_messages() %}
+        {% if mensajes %}
+        <ul>
+        {% for mensaje in mensajes %}
+            <li>{{ mensaje }}</li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>

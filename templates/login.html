@@ -4,18 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Los Backstreet Boys</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <div class="login-container">
-        <h1>Login - Los Backstreet Boys</h1>
+        <img src="{{ url_for('static', filename='backstreet-boys-logo.png') }}" alt="Logo Backstreet Boys" class="logo">
+        <h1>LOS BACKSTREET BOYS</h1>
         <form action="" method="post">
             <label for="usuario">Usuario:</label>
-            <input type="text" id="usuario" name="usuario"><br><br>
+            <input type="text" id="usuario" name="usuario" required autofocus><br><br>
             <label for="contrasena">Contraseña:</label>
-            <input type="password" id="contrasena" name="contrasena"><br><br>
+            <input type="password" id="contrasena" name="contrasena" required><br><br>
             <input type="submit" value="Iniciar Sesión">
         </form>
+        <p>
+            <a href="{{ url_for('cambiar_contrasena') }}">Olvidé mi contraseña</a>
+        </p>
         <p>
             <a href="{{ url_for('verificar_nota') }}">Verificar nota de estudiante</a>
         </p>
